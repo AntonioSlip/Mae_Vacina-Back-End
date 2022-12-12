@@ -5,7 +5,6 @@ const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const cors = require('cors');
-const { response } = require('express');
 const app = express();
 
 app.use(bodyParser.json());
@@ -13,7 +12,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(cors());
 
 app.get('/', (res, result) => {
-    result.send('welcome to my forma')
+    result.send('welcome to my api');
 });
 
 app.post('/api/forma', (req, res) => {
@@ -241,26 +240,19 @@ app.post('/api/dataVaccination', (req, res) => {
 });
 
 
-
-
-
-
-
-
-
-const userRoot = "";
-const passRoot = "";
+const userRoot = "root";
+const passRoot = "password";
 
 const db = mysql.createPool({
     host: "localhost",
     user: userRoot,
     password: passRoot,
     database: "banco_mae_vacina",
-})
+});
 
 //Função para enviar email
-const emailSupport = '';
-const passSupport = '';
+const emailSupport = 'maevacinarecpe@hotmail.com';
+const passSupport = 'maevacina123';
 
 function emailSend(emailFrom, passFrom, emailTo, title, content, res) {
     let smtTrasnport = nodemailer.createTransport({
@@ -287,7 +279,6 @@ function emailSend(emailFrom, passFrom, emailTo, title, content, res) {
     })
     smtTrasnport.close();
 }
-
 
 const PORT = process.env.PORT||3001;
 app.listen(PORT, ()=> {
